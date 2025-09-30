@@ -51,7 +51,7 @@ router.post('/', authMiddleware, async (req, res) => {
 
     // Atualizar arquivo SMIL do usuário após criar playlist
     try {
-      const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+      const userLogin = req.user.usuario || `user_1`;
       const [serverRows] = await db.execute(
         `SELECT servidor_id FROM folders 
          WHERE (user_id = ? OR user_id IN (
@@ -141,7 +141,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
 
     // Atualizar arquivo SMIL do usuário após modificar playlist
     try {
-      const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+      const userLogin = req.user.usuario || `user_1`;
       const [serverRows] = await db.execute(
         `SELECT servidor_id FROM folders 
          WHERE (user_id = ? OR user_id IN (
@@ -282,7 +282,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 
     // Atualizar arquivo SMIL do usuário após remover playlist
     try {
-      const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+      const userLogin = req.user.usuario || `user_1`;
       const [serverRows] = await db.execute(
         `SELECT servidor_id FROM folders 
          WHERE (user_id = ? OR user_id IN (

@@ -10,7 +10,7 @@ router.get('/obs-config', authMiddleware, async (req, res) => {
   try {
     // Para revendas, usar o ID efetivo do usuário
     const userId = req.user.effective_user_id || req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
     
     // Buscar configurações do usuário
     const [userConfigRows] = await db.execute(
@@ -196,7 +196,7 @@ router.get('/obs-config', authMiddleware, async (req, res) => {
 router.get('/fmle-profile', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.effective_user_id || req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     const userBitrate = req.user.bitrate || 2500;
     const userPassword = 'teste2025'; // Senha padrão do usuário
 

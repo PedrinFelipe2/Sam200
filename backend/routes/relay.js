@@ -213,7 +213,7 @@ router.post('/start', authMiddleware, async (req, res) => {
   try {
     const { relay_url, relay_type, server_id } = req.body;
     const userId = req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
 
     if (!relay_url) {
       return res.status(400).json({

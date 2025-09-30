@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/status', authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
 
         // Buscar servidor do usuário
         const [serverRows] = await db.execute(
@@ -57,7 +57,7 @@ router.get('/status', authMiddleware, async (req, res) => {
 router.post('/generate', authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
         const { force_regenerate = false } = req.body;
 
         // Buscar servidor do usuário
@@ -113,7 +113,7 @@ router.post('/generate', authMiddleware, async (req, res) => {
 router.delete('/remove', authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
 
         // Buscar servidor do usuário
         const [serverRows] = await db.execute(

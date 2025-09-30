@@ -11,7 +11,7 @@ router.get('/ssh/:videoId', authMiddleware, async (req, res) => {
     try {
         const videoId = req.params.videoId;
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
 
         // Decodificar videoId (base64)
         let relativePath;
@@ -105,7 +105,7 @@ router.get('/info/:videoId', authMiddleware, async (req, res) => {
     try {
         const videoId = req.params.videoId;
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
 
         // Decodificar videoId
         let relativePath;
@@ -179,7 +179,7 @@ router.post('/convert/:videoId', authMiddleware, async (req, res) => {
     try {
         const videoId = req.params.videoId;
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
         const { bitrate, resolution, quality = 'fast' } = req.body;
 
         // Validar parâmetros
@@ -277,7 +277,7 @@ router.get('/thumbnail/:videoId', authMiddleware, async (req, res) => {
     try {
         const videoId = req.params.videoId;
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
         const { time = '00:00:10' } = req.query;
 
         // Decodificar videoId
@@ -336,7 +336,7 @@ router.get('/urls/:userLogin/:folderName/:fileName', authMiddleware, async (req,
     try {
         const { userLogin, folderName, fileName } = req.params;
         const userId = req.user.id;
-        const userEmail = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userEmail = req.user.usuario || `user_${userId}`;
 
         // Verificar se usuário tem acesso
         if (userLogin !== userEmail) {

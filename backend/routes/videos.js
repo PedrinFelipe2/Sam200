@@ -15,7 +15,7 @@ router.get('/view-url', authMiddleware, async (req, res) => {
   try {
     const { path, video_id } = req.query;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email?.split('@')[0]) || `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
 
     let viewUrl = null;
 
@@ -159,7 +159,7 @@ router.get('/', authMiddleware, async (req, res) => {
   try {
     // Para revendas, usar o ID efetivo do usuário
     const userId = req.user.effective_user_id || req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
     const folderId = req.query.folder_id;
     
     if (!folderId) {
@@ -455,7 +455,7 @@ router.post('/upload', authMiddleware, upload.single('video'), async (req, res) 
     }
 
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_${userId}`;
     const folderId = req.query.folder_id || 'default';
 
     console.log(`📤 Upload iniciado - Usuário: ${userLogin}, Pasta: ${folderId}, Arquivo: ${req.file.originalname}`);

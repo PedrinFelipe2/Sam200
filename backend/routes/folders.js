@@ -49,7 +49,7 @@ router.post('/', authMiddleware, async (req, res) => {
     
     // Para revendas, usar o ID efetivo do usuário
     const userId = req.user.effective_user_id || req.user.id;
-    const userLogin = req.user.usuario || req.user.email?.split('@')[0] || `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
     
     // Sanitizar nome da pasta automaticamente
     const sanitizedName = VideoURLBuilder.sanitizeFolderName(nome);
@@ -205,7 +205,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
     const folderId = req.params.id;
     const { nome } = req.body;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || req.user.email?.split('@')[0] || `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
 
     if (!nome) {
       return res.status(400).json({ error: 'Nome da pasta é obrigatório' });
@@ -314,7 +314,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
   try {
     const folderId = req.params.id;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_${userId}`;
 
     // Verificar se a pasta pertence ao usuário
     const [folderRows] = await db.execute(
@@ -411,7 +411,7 @@ router.get('/:id/info', authMiddleware, async (req, res) => {
   try {
     const folderId = req.params.id;
     const userId = req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
 
     // Buscar dados da pasta
     const [folderRows] = await db.execute(
@@ -497,7 +497,7 @@ router.post('/:id/sync', authMiddleware, async (req, res) => {
   try {
     const folderId = req.params.id;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_${userId}`;
 
     // Buscar dados da pasta
     const [folderRows] = await db.execute(

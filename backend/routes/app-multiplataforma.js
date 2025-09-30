@@ -113,7 +113,7 @@ router.post('/', authMiddleware, upload.fields([
 ]), async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
     
     const {
       nome, email, whatsapp, url_facebook, url_instagram, url_twitter,
@@ -236,7 +236,7 @@ router.post('/create-apk', authMiddleware, upload.fields([
 ]), async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
     
     const { nome, versao, modelo } = req.body;
 
@@ -359,7 +359,7 @@ router.get('/banners', authMiddleware, async (req, res) => {
 router.post('/banners', authMiddleware, upload.single('banner'), async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
     const { nome, link } = req.body;
 
     if (!nome || !req.file) {
@@ -471,7 +471,7 @@ router.post('/notifications', authMiddleware, upload.fields([
 ]), async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     const { titulo, url_link, mensagem } = req.body;
 
     if (!titulo || !mensagem || !req.files || !req.files['url_icone']) {

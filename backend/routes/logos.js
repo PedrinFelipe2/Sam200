@@ -55,7 +55,7 @@ const upload = multer({
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const userEmail = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userEmail = req.user.usuario || `user_${userId}`;
 
     const [rows] = await db.execute(
       `SELECT 
@@ -95,7 +95,7 @@ router.post('/', authMiddleware, upload.single('logo'), async (req, res) => {
 
     const { nome } = req.body;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
 
     if (!nome) {
       return res.status(400).json({ error: 'Nome da logo é obrigatório' });

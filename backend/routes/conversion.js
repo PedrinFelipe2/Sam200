@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/videos', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     const folderId = req.query.folder_id;
 
     if (!folderId) {

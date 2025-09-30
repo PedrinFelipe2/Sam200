@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/status', authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
 
         // Buscar servidor do usuário
         const [serverRows] = await db.execute(
@@ -59,7 +59,7 @@ router.get('/status', authMiddleware, async (req, res) => {
 router.post('/create', authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
         const { force_recreate = false } = req.body;
 
         // Buscar servidor do usuário
@@ -144,7 +144,7 @@ router.post('/create', authMiddleware, async (req, res) => {
 router.post('/migrate', authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
-        const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+        const userLogin = req.user.usuario || `user_${userId}`;
 
         // Buscar servidor do usuário
         const [serverRows] = await db.execute(

@@ -138,7 +138,7 @@ router.post('/create', authMiddleware, upload.fields([
 ]), async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.email ? req.user.email.split('@')[0] : `user_${userId}`;
+    const userLogin = req.user.usuario || `user_${userId}`;
     
     const {
       webtv_nome, webtv_facebook, webtv_twitter, webtv_site, webtv_descricao,
@@ -258,7 +258,7 @@ router.put('/configure', authMiddleware, upload.fields([
 ]), async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     
     const {
       app_email, app_whatsapp, app_url_facebook, app_url_instagram,

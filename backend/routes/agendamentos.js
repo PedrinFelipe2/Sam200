@@ -118,7 +118,7 @@ router.post('/', authMiddleware, async (req, res) => {
     // Atualizar arquivo SMIL do usuário após criar agendamento
     try {
       const effectiveUserId = req.user.effective_user_id || req.user.id;
-      const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${effectiveUserId}`);
+      const userLogin = req.user.usuario || `user_${effectiveUserId}`;
       const [serverRows] = await db.execute(
         `SELECT servidor_id FROM folders 
          WHERE (user_id = ? OR user_id IN (
@@ -174,7 +174,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
     // Atualizar arquivo SMIL do usuário após remover agendamento
     try {
       const effectiveUserId = req.user.effective_user_id || req.user.id;
-      const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${req.user.id}`);
+      const userLogin = req.user.usuario || `user_${req.user.id}`;
       const [serverRows] = await db.execute(
         `SELECT servidor_id FROM folders 
          WHERE (user_id = ? OR user_id IN (

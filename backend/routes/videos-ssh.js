@@ -203,7 +203,7 @@ router.get('/proxy-stream/:videoId', async (req, res) => {
 router.get('/list', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     const folderName = req.query.folder;
 
     if (!folderName) {
@@ -478,7 +478,7 @@ router.get('/info/:videoId', authMiddleware, async (req, res) => {
   try {
     const videoId = req.params.videoId;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
 
     // Decodificar videoId
     let remotePath;
@@ -530,7 +530,7 @@ router.delete('/:videoId', authMiddleware, async (req, res) => {
   try {
     const videoId = req.params.videoId;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
 
     // Decodificar videoId
     let remotePath;
@@ -636,7 +636,7 @@ router.delete('/:videoId', authMiddleware, async (req, res) => {
 router.post('/sync-database', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     const { folderId } = req.body;
 
     if (!folderId) {
@@ -862,7 +862,7 @@ router.put('/:videoId/rename', authMiddleware, async (req, res) => {
     const videoId = req.params.videoId;
     const { novo_nome } = req.body;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
 
     if (!novo_nome) {
       return res.status(400).json({ error: 'Novo nome é obrigatório' });
@@ -957,7 +957,7 @@ router.put('/rename-by-path/:videoId', authMiddleware, async (req, res) => {
     const videoId = req.params.videoId;
     const { novo_nome } = req.body;
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
 
     if (!novo_nome) {
       return res.status(400).json({ error: 'Novo nome é obrigatório' });

@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/url', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     
     const {
       player = '1',
@@ -72,7 +72,7 @@ router.get('/url', authMiddleware, async (req, res) => {
 router.get('/status', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
 
     // Verificar transmissão de playlist ativa
     const [transmissionRows] = await db.execute(
@@ -151,7 +151,7 @@ router.get('/status', authMiddleware, async (req, res) => {
 router.get('/embed-code', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
-    const userLogin = req.user.usuario || (req.user.email ? req.user.email.split('@')[0] : `user_${userId}`);
+    const userLogin = req.user.usuario || `user_1`;
     
     const {
       player = '1',
